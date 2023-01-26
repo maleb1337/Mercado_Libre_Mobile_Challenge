@@ -6,14 +6,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import cl.maleb.mercadolibre.mobile.challenge.repository.marketplace.MarketPlaceRepository
+import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.events.MarketPlaceListEvent
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.model.MarketPlaceListItemViewData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MarketPlaceListViewModel @Inject constructor(private val repository: MarketPlaceRepository) :
     ViewModel() {
+
+    var lastSearchQuery: String? = null
 
     /**
      * Paging section
@@ -26,10 +31,30 @@ class MarketPlaceListViewModel @Inject constructor(private val repository: Marke
 
     fun getMarketPlaceList(searchQuery: String) {
         viewModelScope.launch {
-            // if you want you can try with cache, but it has a weird behaviour, that's why is without cache now.
+            /**
+             *  if you want you can try with cache,
+             *  but it has a weird behaviour with the recycler itself,
+             *  that's why is without cache now.
+             */
             repository.getMarketPlaceListWithoutCache(searchQuery).collect {
                 _marketPlaceItemsLiveData.value = it
             }
         }
     }
+
+    /**
+     * Events section
+     */
+
+    private val marketPlaceListEventChannel = Channel<MarketPlaceListEvent>()
+    val marketPlaceListEvent = marketPlaceListEventChannel.receiveAsFlow()
+
+    fun searchByQueryEvent(searchQuery: String) = viewModelScope.launch {
+        marketPlaceListEventChannel.send(MarketPlaceListEvent.SearchByQuery(searchQuery))
+    }
+
+    fun navigateToDetailScreenEvent(identifier: String) = viewModelScope.launch {
+        marketPlaceListEventChannel.send(MarketPlaceListEvent.NavigateToDetailScreen(identifier))
+    }
+
 }

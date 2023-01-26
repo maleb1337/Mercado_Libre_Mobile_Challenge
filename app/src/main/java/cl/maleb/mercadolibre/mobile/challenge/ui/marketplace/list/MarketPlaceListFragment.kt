@@ -1,16 +1,21 @@
 package cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import cl.maleb.mercadolibre.mobile.challenge.R
 import cl.maleb.mercadolibre.mobile.challenge.databinding.FragmentMarketplaceListBinding
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.adapter.MarketPlaceListAdapter
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.adapter.MarketPlaceListLoadStateAdapter
+import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.events.MarketPlaceListEvent
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.viewmodel.MarketPlaceListViewModel
+import cl.maleb.mercadolibre.mobile.challenge.utils.extension.onQueryTextSubmit
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,6 +24,7 @@ class MarketPlaceListFragment : Fragment() {
     var binding: FragmentMarketplaceListBinding? = null
     private val viewModel: MarketPlaceListViewModel by viewModels()
     private val marketPlaceListAdapter by lazy { MarketPlaceListAdapter() }
+    private lateinit var searchView: SearchView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,10 +42,10 @@ class MarketPlaceListFragment : Fragment() {
     }
 
     private fun setUpView() {
+        setUpMenu()
         // set up paging adapter
         marketPlaceListAdapter.onItemClickListener = { item ->
-            // TODO: redirect to detail
-            item.marketPlaceIdentifier
+            viewModel.navigateToDetailScreenEvent(item.marketPlaceIdentifier)
         }
         binding?.recyclerView?.apply {
             setHasFixedSize(true)
@@ -49,13 +55,48 @@ class MarketPlaceListFragment : Fragment() {
                 footer = MarketPlaceListLoadStateAdapter { marketPlaceListAdapter.retry() }
             )
         }
-        // TODO: remove this, just for testing
-        viewModel.getMarketPlaceList("Sir Fausto")
+    }
+
+    private fun setUpMenu() {
+        activity?.let { activity ->
+            (activity as MenuHost).addMenuProvider(object : MenuProvider {
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.menu_marketplace_list, menu)
+                    val searchItem = menu.findItem(R.id.action_search)
+                    searchView = searchItem.actionView as SearchView
+                    searchView.onQueryTextSubmit { query ->
+                        // update search query
+                        if (query.isNotEmpty()) {
+                            viewModel.searchByQueryEvent(query)
+                            viewModel.lastSearchQuery = query
+                        }
+                    }
+                }
+
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    return true
+                }
+            })
+
+        }
     }
 
     private fun initObservers() {
         viewModel.marketPlaceItemsLiveData.observe(viewLifecycleOwner) { pagingData ->
             marketPlaceListAdapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
+        }
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewModel.marketPlaceListEvent.collect { event ->
+                when (event) {
+                    is MarketPlaceListEvent.NavigateToDetailScreen -> {
+                        // TODO: redirect to detail
+                        event.marketPlaceIdentifier
+                    }
+                    is MarketPlaceListEvent.SearchByQuery -> {
+                        viewModel.getMarketPlaceList(event.searchQuery)
+                    }
+                }
+            }
         }
     }
 

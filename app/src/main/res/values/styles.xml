@@ -5,11 +5,12 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary_100</item>
         <item name="colorPrimaryVariant">@color/primary_70</item>
-        <item name="colorOnPrimary">@color/greyscale</item>
+        <item name="colorOnPrimary">@color/gray</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item name="android:textColor">@color/gray</item>
     </style>
 
     <style name="TextViewTitle">
