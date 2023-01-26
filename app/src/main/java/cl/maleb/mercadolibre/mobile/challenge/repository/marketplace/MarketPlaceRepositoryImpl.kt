@@ -5,6 +5,7 @@ import androidx.paging.PagingData
 import cl.maleb.mercadolibre.mobile.challenge.data.api.RemoteDataSource
 import cl.maleb.mercadolibre.mobile.challenge.database.LocalDataSource
 import cl.maleb.mercadolibre.mobile.challenge.mapper.marketplace.MarketPlaceMapperFacade
+import cl.maleb.mercadolibre.mobile.challenge.paging.marketplace.MarketPlacePagingSource
 import cl.maleb.mercadolibre.mobile.challenge.paging.marketplace.MarketPlaceRemoteMediator
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.model.MarketPlaceListItemViewData
 import cl.maleb.mercadolibre.mobile.challenge.utils.getDefaultPagingConfig
@@ -19,7 +20,7 @@ class MarketPlaceRepositoryImpl @Inject constructor(
     private val marketPlaceMapperFacade: MarketPlaceMapperFacade
 ) : MarketPlaceRepository {
 
-    override fun getMarketPlaceList(
+    override fun getMarketPlaceListWithCache(
         searchQuery: String
     ): Flow<PagingData<MarketPlaceListItemViewData>> =
         Pager(
@@ -30,4 +31,15 @@ class MarketPlaceRepositoryImpl @Inject constructor(
         ) {
             localDataSource.getMarketPlaceList()
         }.flow
+
+    override fun getMarketPlaceListWithoutCache(searchQuery: String): Flow<PagingData<MarketPlaceListItemViewData>> =
+        Pager(
+            config = getDefaultPagingConfig(),
+            pagingSourceFactory = {
+                (MarketPlacePagingSource(
+                    remoteDataSource, marketPlaceMapperFacade, searchQuery
+                ))
+            }
+        ).flow
+
 }

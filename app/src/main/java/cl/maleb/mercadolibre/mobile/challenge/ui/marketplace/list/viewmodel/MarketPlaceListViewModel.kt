@@ -26,7 +26,8 @@ class MarketPlaceListViewModel @Inject constructor(private val repository: Marke
 
     fun getMarketPlaceList(searchQuery: String) {
         viewModelScope.launch {
-            repository.getMarketPlaceList(searchQuery).collect {
+            // if you want you can try with cache, but it has a weird behaviour, that's why is without cache now.
+            repository.getMarketPlaceListWithoutCache(searchQuery).collect {
                 _marketPlaceItemsLiveData.value = it
             }
         }

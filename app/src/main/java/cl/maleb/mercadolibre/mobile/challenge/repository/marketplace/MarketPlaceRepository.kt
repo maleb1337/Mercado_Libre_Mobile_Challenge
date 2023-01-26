@@ -5,5 +5,6 @@ import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.model.MarketPl
 import kotlinx.coroutines.flow.Flow
 
 interface MarketPlaceRepository {
-    fun getMarketPlaceList(searchQuery: String): Flow<PagingData<MarketPlaceListItemViewData>>
+    fun getMarketPlaceListWithCache(searchQuery: String): Flow<PagingData<MarketPlaceListItemViewData>>
+    fun getMarketPlaceListWithoutCache(searchQuery: String): Flow<PagingData<MarketPlaceListItemViewData>>
 }
