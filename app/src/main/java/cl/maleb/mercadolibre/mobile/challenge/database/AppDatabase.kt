@@ -7,10 +7,12 @@ import cl.maleb.mercadolibre.mobile.challenge.database.marketplace.MarketPlaceDa
 import cl.maleb.mercadolibre.mobile.challenge.database.remotekey.RemoteKeyDao
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.model.MarketPlaceListItemViewData
 import cl.maleb.mercadolibre.mobile.challenge.utils.converters.MarketPlaceConverter
+import cl.maleb.mercadolibre.mobile.challenge.utils.remotekey.RemoteKeyData
 
 @Database(
     entities = [
-        MarketPlaceListItemViewData::class
+        MarketPlaceListItemViewData::class,
+        RemoteKeyData::class
     ],
     version = 1,
     exportSchema = false
