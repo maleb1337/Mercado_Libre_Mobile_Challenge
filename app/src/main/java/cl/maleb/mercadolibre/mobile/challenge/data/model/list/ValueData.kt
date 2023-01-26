@@ -10,7 +10,5 @@ data class ValueData(
     @Json(name = "name")
     val name: String? = null,
     @Json(name = "source")
-    val source: Long? = null,
-    @Json(name = "struct")
-    val struct: StructData? = null
+    val source: Long? = null
 )

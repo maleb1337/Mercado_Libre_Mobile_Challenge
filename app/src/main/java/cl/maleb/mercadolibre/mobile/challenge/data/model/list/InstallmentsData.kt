@@ -10,7 +10,5 @@ data class InstallmentsData(
     @Json(name = "currency_id")
     val currencyId: String? = null,
     @Json(name = "quantity")
-    val quantity: Int? = null,
-    @Json(name = "rate")
-    val rate: Int? = null
+    val quantity: Int? = null
 )

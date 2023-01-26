@@ -5,8 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "marketPlaceListItemViewDataTable")
 data class MarketPlaceListItemViewData(
-    @PrimaryKey(autoGenerate = true) val idAutoIncrement: Int = 0,
-    val marketPlaceIdentifier: String,
+    @PrimaryKey val marketPlaceIdentifier: String,
     val imageUrl: String,
     val brandName: String,
     val productName: String,

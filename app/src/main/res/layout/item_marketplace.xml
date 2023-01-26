@@ -13,7 +13,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,9 +22,10 @@
     <TextView
         android:id="@+id/tv_brand_title"
         style="@style/TextViewTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_list"
         app:layout_constraintTop_toTopOf="@+id/iv_list"
         tools:text="SIR FAUSTO" />
@@ -33,19 +33,21 @@
     <TextView
         android:id="@+id/tv_product_name"
         style="@style/TextViewSubtitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_list"
         app:layout_constraintTop_toBottomOf="@+id/tv_brand_title"
         tools:text="Shampoo Caída X 500 Ml" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_product_price"
         style="@style/TextViewTitlePriceMoney"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_list"
         app:layout_constraintTop_toBottomOf="@+id/tv_product_name"
         tools:text="$ 32.490" />

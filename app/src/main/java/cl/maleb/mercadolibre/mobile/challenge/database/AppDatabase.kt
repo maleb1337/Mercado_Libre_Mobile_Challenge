@@ -14,12 +14,12 @@ import cl.maleb.mercadolibre.mobile.challenge.utils.remotekey.RemoteKeyData
         MarketPlaceListItemViewData::class,
         RemoteKeyData::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
-@TypeConverters(
-    MarketPlaceConverter::class
-)
+//@TypeConverters(
+//    MarketPlaceConverter::class
+//)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun marketPlaceDao(): MarketPlaceDao
     abstract fun remoteKeyDao(): RemoteKeyDao

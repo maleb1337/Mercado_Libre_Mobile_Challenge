@@ -6,6 +6,7 @@ import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.model.MarketPl
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.model.MarketPlaceListViewData
 import cl.maleb.mercadolibre.mobile.challenge.utils.Mapper
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 class MarketPlaceListMapper @Inject constructor() :
     Mapper<MarketPlaceListViewData, MainResponseListData> {
@@ -20,9 +21,9 @@ class MarketPlaceListMapper @Inject constructor() :
             MarketPlaceListItemViewData(
                 marketPlaceIdentifier = it.id.orEmpty(),
                 imageUrl = it.thumbnail.orEmpty(),
-                brandName = it.attributes?.first { attribute -> attribute.id == "BRAND" }?.name.orEmpty(),
+                brandName = it.attributes?.first { attribute -> attribute.id == "BRAND" }?.valueName.orEmpty(),
                 productName = it.title.orEmpty(),
-                price = it.price ?: 0,
+                price = it.price?.roundToInt() ?: 0,
                 orderBackend = it.orderBackend ?: 0
             )
         }.orEmpty()

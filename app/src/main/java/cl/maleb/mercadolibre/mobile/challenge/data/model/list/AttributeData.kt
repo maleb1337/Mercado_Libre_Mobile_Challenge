@@ -19,8 +19,6 @@ data class AttributeData(
     val valueId: String? = null,
     @Json(name = "value_name")
     val valueName: String? = null,
-    @Json(name = "value_struct")
-    val valueStruct: ValueStructData? = null,
     @Json(name = "value_type")
     val valueType: String? = null,
     @Json(name = "values")
