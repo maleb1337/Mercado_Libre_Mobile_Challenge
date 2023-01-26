@@ -12,7 +12,7 @@ data class PictureData(
     @Json(name = "quality")
     val quality: String? = null,
     @Json(name = "secure_url")
-    val secure_url: String? = null,
+    val secureUrl: String? = null,
     @Json(name = "size")
     val size: String? = null,
     @Json(name = "url")

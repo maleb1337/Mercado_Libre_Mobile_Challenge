@@ -2,6 +2,7 @@ package cl.maleb.mercadolibre.mobile.challenge.di
 
 import cl.maleb.mercadolibre.mobile.challenge.mapper.marketplace.MarketPlaceMapperFacade
 import cl.maleb.mercadolibre.mobile.challenge.mapper.marketplace.MarketPlaceMapperFacadeImpl
+import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.detail.mapper.MarketPlaceDetailMapper
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.mapper.MarketPlaceListMapper
 import dagger.Module
 import dagger.Provides
@@ -15,6 +16,10 @@ object MapperModule {
     @Provides
     @Singleton
     fun provideMarketPlaceMapperFacadeImpl(
-        marketPlaceListMapper: MarketPlaceListMapper
-    ) = MarketPlaceMapperFacadeImpl(marketPlaceListMapper) as MarketPlaceMapperFacade
+        marketPlaceListMapper: MarketPlaceListMapper,
+        marketPlaceDetailMapper: MarketPlaceDetailMapper
+    ) = MarketPlaceMapperFacadeImpl(
+        marketPlaceListMapper,
+        marketPlaceDetailMapper
+    ) as MarketPlaceMapperFacade
 }

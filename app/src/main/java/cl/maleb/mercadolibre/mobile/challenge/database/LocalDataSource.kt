@@ -1,6 +1,7 @@
 package cl.maleb.mercadolibre.mobile.challenge.database
 
 import androidx.paging.PagingSource
+import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.detail.model.MarketPlaceDetailViewData
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.model.MarketPlaceListItemViewData
 import cl.maleb.mercadolibre.mobile.challenge.utils.remotekey.RemoteKeyData
 import kotlinx.coroutines.flow.Flow
@@ -10,6 +11,8 @@ interface LocalDataSource {
     suspend fun insertMarketPlaceList(listItemViewData: List<MarketPlaceListItemViewData>)
     fun getMarketPlaceList(): PagingSource<Int, MarketPlaceListItemViewData>
     suspend fun deleteMarketPlaceList()
+    suspend fun deleteAndInsertMarketPlaceDetail(marketPlaceDetailViewData: MarketPlaceDetailViewData)
+    fun getMarketPlaceDetail(marketPlaceIdentifier: String): Flow<MarketPlaceDetailViewData>
     //endregion
 
     //region Remote Key

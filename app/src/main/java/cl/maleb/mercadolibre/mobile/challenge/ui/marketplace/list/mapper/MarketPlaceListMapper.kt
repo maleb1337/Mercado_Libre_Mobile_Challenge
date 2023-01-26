@@ -5,6 +5,7 @@ import cl.maleb.mercadolibre.mobile.challenge.data.model.list.MainResponseListDa
 import cl.maleb.mercadolibre.mobile.challenge.data.model.list.ResponseListData
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.model.MarketPlaceListItemViewData
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.model.MarketPlaceListViewData
+import cl.maleb.mercadolibre.mobile.challenge.utils.ATTRIBUTE_BRAND
 import cl.maleb.mercadolibre.mobile.challenge.utils.Mapper
 import cl.maleb.mercadolibre.mobile.challenge.utils.extension.empty
 import javax.inject.Inject
@@ -32,10 +33,10 @@ class MarketPlaceListMapper @Inject constructor() :
     }
 
     private fun parseBrandName(attributes: List<AttributeData>?): String {
-        return if (attributes.isNullOrEmpty()){
+        return if (attributes.isNullOrEmpty()) {
             String.empty()
         } else {
-            attributes.find { attribute -> attribute.id == "BRAND" }?.valueName.orEmpty()
+            attributes.find { attribute -> attribute.id == ATTRIBUTE_BRAND }?.valueName.orEmpty()
         }
     }
 

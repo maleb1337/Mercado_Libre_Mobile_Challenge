@@ -7,8 +7,11 @@ import cl.maleb.mercadolibre.mobile.challenge.database.LocalDataSource
 import cl.maleb.mercadolibre.mobile.challenge.mapper.marketplace.MarketPlaceMapperFacade
 import cl.maleb.mercadolibre.mobile.challenge.paging.marketplace.MarketPlacePagingSource
 import cl.maleb.mercadolibre.mobile.challenge.paging.marketplace.MarketPlaceRemoteMediator
+import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.detail.model.MarketPlaceDetailViewData
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.model.MarketPlaceListItemViewData
 import cl.maleb.mercadolibre.mobile.challenge.utils.getDefaultPagingConfig
+import cl.maleb.mercadolibre.mobile.challenge.utils.network.Resource
+import cl.maleb.mercadolibre.mobile.challenge.utils.network.networkBoundResource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -41,5 +44,22 @@ class MarketPlaceRepositoryImpl @Inject constructor(
                 ))
             }
         ).flow
+
+    override fun getMarketPlaceDetail(marketPlaceIdentifier: String): Flow<Resource<MarketPlaceDetailViewData>> =
+        networkBoundResource(
+            databaseQuery = {
+                localDataSource.getMarketPlaceDetail(marketPlaceIdentifier)
+            },
+            networkCall = {
+                remoteDataSource.getDetailById(marketPlaceIdentifier)
+            },
+            saveCallResult = {
+                localDataSource.deleteAndInsertMarketPlaceDetail(
+                    marketPlaceMapperFacade.marketPlaceDetailExecuteMapper(
+                        it
+                    )
+                )
+            }
+        )
 
 }

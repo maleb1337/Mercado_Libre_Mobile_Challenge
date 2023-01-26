@@ -3,6 +3,7 @@ package cl.maleb.mercadolibre.mobile.challenge.database
 import androidx.paging.PagingSource
 import cl.maleb.mercadolibre.mobile.challenge.database.marketplace.MarketPlaceDao
 import cl.maleb.mercadolibre.mobile.challenge.database.remotekey.RemoteKeyDao
+import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.detail.model.MarketPlaceDetailViewData
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.model.MarketPlaceListItemViewData
 import cl.maleb.mercadolibre.mobile.challenge.utils.remotekey.RemoteKeyData
 import kotlinx.coroutines.flow.Flow
@@ -21,6 +22,11 @@ class LocalDataSourceImpl @Inject constructor(
         marketPlaceDao.getMarketPlaceList()
 
     override suspend fun deleteMarketPlaceList() = marketPlaceDao.deleteMarketPlaceList()
+    override suspend fun deleteAndInsertMarketPlaceDetail(marketPlaceDetailViewData: MarketPlaceDetailViewData) =
+        marketPlaceDao.deleteAndInsertMarketPlaceDetail(marketPlaceDetailViewData)
+
+    override fun getMarketPlaceDetail(marketPlaceIdentifier: String) =
+        marketPlaceDao.getMarketPlaceDetail(marketPlaceIdentifier)
 
     override suspend fun insertOrReplaceRemoteKey(remoteKey: RemoteKeyData) =
         remoteKeyDao.insertOrReplaceRemoteKey(remoteKey)
