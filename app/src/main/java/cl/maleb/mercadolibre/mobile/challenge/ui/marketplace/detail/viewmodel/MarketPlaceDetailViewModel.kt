@@ -5,9 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cl.maleb.mercadolibre.mobile.challenge.repository.marketplace.MarketPlaceRepository
+import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.detail.events.MarketPlaceDetailEvent
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.detail.model.MarketPlaceDetailViewData
 import cl.maleb.mercadolibre.mobile.challenge.utils.network.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,5 +29,18 @@ class MarketPlaceDetailViewModel @Inject constructor(private val repository: Mar
                 _marketPlaceDetailLiveData.value = it
             }
         }
+    }
+
+    /**
+     * Events section
+     */
+
+    private val marketPlaceDetailEventChannel = Channel<MarketPlaceDetailEvent>()
+    val marketPlaceDetailEvent = marketPlaceDetailEventChannel.receiveAsFlow()
+
+    fun getMarketDetailEvent(marketPlaceIdentifier: String) = viewModelScope.launch {
+        marketPlaceDetailEventChannel.send(
+            MarketPlaceDetailEvent.GetMarketDetail(marketPlaceIdentifier)
+        )
     }
 }

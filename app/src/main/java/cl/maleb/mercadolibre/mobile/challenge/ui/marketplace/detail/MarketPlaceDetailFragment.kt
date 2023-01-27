@@ -6,12 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import cl.maleb.mercadolibre.mobile.challenge.R
 import cl.maleb.mercadolibre.mobile.challenge.databinding.FragmentMarketplaceDetailBinding
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.detail.adapter.AttributeListAdapter
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.detail.adapter.ImageListAdapter
+import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.detail.events.MarketPlaceDetailEvent
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.detail.model.MarketPlaceDetailViewData
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.detail.viewmodel.MarketPlaceDetailViewModel
 import cl.maleb.mercadolibre.mobile.challenge.utils.extension.gone
@@ -58,12 +61,11 @@ class MarketPlaceDetailFragment : Fragment() {
 
             includeContentErrorLoadingView.apply {
                 btnRetry.setOnClickListener {
-                    viewModel.getMarketPlaceDetail(args.marketPlaceIdentifier)
+                    viewModel.getMarketDetailEvent(args.marketPlaceIdentifier)
                 }
             }
         }
-        viewModel.getMarketPlaceDetail(args.marketPlaceIdentifier)
-
+        viewModel.getMarketDetailEvent(args.marketPlaceIdentifier)
     }
 
     private fun initObservers() {
@@ -72,6 +74,15 @@ class MarketPlaceDetailFragment : Fragment() {
                 is Resource.Error -> showErrorView()
                 is Resource.Loading -> showLoadingView()
                 is Resource.Success -> showSuccessView(result.data)
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewModel.marketPlaceDetailEvent.collect { event ->
+                when (event) {
+                    is MarketPlaceDetailEvent.GetMarketDetail -> {
+                        viewModel.getMarketPlaceDetail(event.marketPlaceIdentifier)
+                    }
+                }
             }
         }
     }
