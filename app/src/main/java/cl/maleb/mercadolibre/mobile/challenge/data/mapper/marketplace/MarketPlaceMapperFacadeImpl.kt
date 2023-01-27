@@ -1,4 +1,4 @@
-package cl.maleb.mercadolibre.mobile.challenge.mapper.marketplace
+package cl.maleb.mercadolibre.mobile.challenge.data.mapper.marketplace
 
 import cl.maleb.mercadolibre.mobile.challenge.data.model.detail.MainResponseDetailData
 import cl.maleb.mercadolibre.mobile.challenge.data.model.list.MainResponseListData

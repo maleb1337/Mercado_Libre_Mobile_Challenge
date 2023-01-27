@@ -1,7 +1,7 @@
 package cl.maleb.mercadolibre.mobile.challenge.di
 
-import cl.maleb.mercadolibre.mobile.challenge.mapper.marketplace.MarketPlaceMapperFacade
-import cl.maleb.mercadolibre.mobile.challenge.mapper.marketplace.MarketPlaceMapperFacadeImpl
+import cl.maleb.mercadolibre.mobile.challenge.data.mapper.marketplace.MarketPlaceMapperFacade
+import cl.maleb.mercadolibre.mobile.challenge.data.mapper.marketplace.MarketPlaceMapperFacadeImpl
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.detail.mapper.MarketPlaceDetailMapper
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.mapper.MarketPlaceListMapper
 import dagger.Module

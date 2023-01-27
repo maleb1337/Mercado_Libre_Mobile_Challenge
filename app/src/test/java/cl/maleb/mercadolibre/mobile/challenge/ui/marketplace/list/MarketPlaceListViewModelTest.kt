@@ -1,7 +1,7 @@
 package cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list
 
 import app.cash.turbine.test
-import cl.maleb.mercadolibre.mobile.challenge.paging.marketplace.MarketPlacePagingSource
+import cl.maleb.mercadolibre.mobile.challenge.data.paging.marketplace.MarketPlacePagingSource
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.events.MarketPlaceListEvent
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.viewmodel.MarketPlaceListViewModel
 import cl.maleb.mercadolibre.mobile.challenge.utils.BaseUnitTest

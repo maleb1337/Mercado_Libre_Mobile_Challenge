@@ -4,9 +4,9 @@ import androidx.paging.Pager
 import androidx.paging.PagingData
 import cl.maleb.mercadolibre.mobile.challenge.data.api.RemoteDataSource
 import cl.maleb.mercadolibre.mobile.challenge.database.LocalDataSource
-import cl.maleb.mercadolibre.mobile.challenge.mapper.marketplace.MarketPlaceMapperFacade
-import cl.maleb.mercadolibre.mobile.challenge.paging.marketplace.MarketPlacePagingSource
-import cl.maleb.mercadolibre.mobile.challenge.paging.marketplace.MarketPlaceRemoteMediator
+import cl.maleb.mercadolibre.mobile.challenge.data.mapper.marketplace.MarketPlaceMapperFacade
+import cl.maleb.mercadolibre.mobile.challenge.data.paging.marketplace.MarketPlacePagingSource
+import cl.maleb.mercadolibre.mobile.challenge.data.paging.marketplace.MarketPlaceRemoteMediator
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.detail.model.MarketPlaceDetailViewData
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.model.MarketPlaceListItemViewData
 import cl.maleb.mercadolibre.mobile.challenge.utils.getDefaultPagingConfig

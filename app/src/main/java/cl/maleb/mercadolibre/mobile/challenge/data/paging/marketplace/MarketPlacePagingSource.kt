@@ -1,9 +1,9 @@
-package cl.maleb.mercadolibre.mobile.challenge.paging.marketplace
+package cl.maleb.mercadolibre.mobile.challenge.data.paging.marketplace
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import cl.maleb.mercadolibre.mobile.challenge.data.api.RemoteDataSource
-import cl.maleb.mercadolibre.mobile.challenge.mapper.marketplace.MarketPlaceMapperFacade
+import cl.maleb.mercadolibre.mobile.challenge.data.mapper.marketplace.MarketPlaceMapperFacade
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.model.MarketPlaceListItemViewData
 import cl.maleb.mercadolibre.mobile.challenge.utils.PAGE_LIMIT
 import cl.maleb.mercadolibre.mobile.challenge.utils.STARTING_PAGE_INDEX
