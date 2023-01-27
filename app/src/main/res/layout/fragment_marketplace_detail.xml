@@ -6,84 +6,76 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_content"
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="attributes_recycler_view, image_recycler_view, tv_condition, tv_price, tv_title" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/image_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_condition"
+        style="@android:style/TextAppearance.DeviceDefault.Widget.ActionMode.Subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_recycler_view"
+        tools:text="Condición" />
+
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@android:style/TextAppearance.Holo.Widget.ActionBar.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_condition"
+        tools:text="Titulo" />
+
+    <TextView
+        android:id="@+id/tv_price"
+        style="@android:style/TextAppearance.Holo.Widget.ActionBar.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        tools:text="$ 499.990" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/attributes_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:fadeScrollbars="false"
+        android:padding="16dp"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/image_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_condition"
-            style="@android:style/TextAppearance.DeviceDefault.Widget.ActionMode.Subtitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:padding="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_recycler_view"
-            tools:text="Condición" />
-
-
-        <TextView
-            android:id="@+id/tv_title"
-            style="@android:style/TextAppearance.Holo.Widget.ActionBar.Title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_condition"
-            tools:text="Titulo" />
-
-        <TextView
-            android:id="@+id/tv_price"
-            style="@android:style/TextAppearance.Holo.Widget.ActionBar.Title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title"
-            tools:text="$ 499.990" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/attributes_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            android:fadeScrollbars="false"
-            android:padding="16dp"
-            android:scrollbars="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_price"
-            app:layout_constraintVertical_bias="0.0" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@+id/tv_price"
+        app:layout_constraintVertical_bias="0.0" />
 
     <include
         android:id="@+id/include_content_error_loading_view"
         layout="@layout/content_error_loading_view"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-

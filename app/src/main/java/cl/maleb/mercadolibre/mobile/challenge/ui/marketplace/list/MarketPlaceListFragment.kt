@@ -43,7 +43,7 @@ class MarketPlaceListFragment : Fragment() {
     }
 
     private fun setUpView() {
-        setUpMenu()
+        setHasOptionsMenu(true)
         // set up paging adapter
         marketPlaceListAdapter.onItemClickListener = { item ->
             viewModel.navigateToDetailScreenEvent(item.marketPlaceIdentifier)
@@ -58,27 +58,17 @@ class MarketPlaceListFragment : Fragment() {
         }
     }
 
-    private fun setUpMenu() {
-        activity?.let { activity ->
-            (activity as MenuHost).addMenuProvider(object : MenuProvider {
-                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                    menuInflater.inflate(R.menu.menu_marketplace_list, menu)
-                    val searchItem = menu.findItem(R.id.action_search)
-                    searchView = searchItem.actionView as SearchView
-                    searchView.onQueryTextSubmit { query ->
-                        // update search query
-                        if (query.isNotEmpty()) {
-                            viewModel.searchByQueryEvent(query)
-                            viewModel.lastSearchQuery = query
-                        }
-                    }
-                }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_marketplace_list, menu)
+        val searchItem = menu.findItem(R.id.action_search)
+        searchView = searchItem.actionView as SearchView
 
-                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                    return true
-                }
-            })
-
+        searchView.onQueryTextSubmit { query ->
+            // update search query
+            if (query.isNotEmpty()) {
+                viewModel.searchByQueryEvent(query)
+                viewModel.lastSearchQuery = query
+            }
         }
     }
 
@@ -98,7 +88,6 @@ class MarketPlaceListFragment : Fragment() {
                     }
                     is MarketPlaceListEvent.SearchByQuery -> {
                         viewModel.getMarketPlaceList(event.searchQuery)
-                        searchView.clearFocus()
                     }
                 }
             }

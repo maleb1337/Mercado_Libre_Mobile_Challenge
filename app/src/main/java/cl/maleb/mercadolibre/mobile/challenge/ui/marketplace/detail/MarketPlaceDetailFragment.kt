@@ -79,7 +79,7 @@ class MarketPlaceDetailFragment : Fragment() {
     private fun showSuccessView(data: MarketPlaceDetailViewData?) {
         if (data != null) {
             binding?.apply {
-                clContent.visible()
+                groupContent.visible()
                 includeContentErrorLoadingView.root.gone()
                 // fill out adapters / controls
                 imageListAdapter.submitList(data.pictures)
@@ -96,8 +96,9 @@ class MarketPlaceDetailFragment : Fragment() {
 
     private fun showLoadingView() {
         binding?.apply {
-            clContent.gone()
+            groupContent.gone()
             includeContentErrorLoadingView.apply {
+                root.visible()
                 progressBar.visible()
                 llErrorRetry.gone()
             }
@@ -106,8 +107,9 @@ class MarketPlaceDetailFragment : Fragment() {
 
     private fun showErrorView() {
         binding?.apply {
-            clContent.gone()
+            groupContent.gone()
             includeContentErrorLoadingView.apply {
+                root.visible()
                 progressBar.gone()
                 llErrorRetry.visible()
             }
