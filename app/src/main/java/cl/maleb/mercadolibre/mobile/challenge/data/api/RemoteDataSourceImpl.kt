@@ -14,7 +14,7 @@ class RemoteDataSourceImpl @Inject constructor(private val apiService: ApiServic
         limit: Int
     ): MainResponseListData = apiService.getListBySearch(searchQuery, offset, limit)
 
-    override suspend fun getDetailById(identifier: String): MainResponseDetailData =
+    override suspend fun getDetailById(identifier: String): List<MainResponseDetailData> =
         apiService.getDetailById(identifier)
 
 }

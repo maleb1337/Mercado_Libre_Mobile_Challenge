@@ -10,9 +10,9 @@ import cl.maleb.mercadolibre.mobile.challenge.utils.Mapper
 import javax.inject.Inject
 
 class MarketPlaceDetailMapper @Inject constructor() :
-    Mapper<MarketPlaceDetailViewData, MainResponseDetailData> {
-    override fun executeMapping(type: MainResponseDetailData): MarketPlaceDetailViewData {
-        type.body.let { data ->
+    Mapper<MarketPlaceDetailViewData, List<MainResponseDetailData>> {
+    override fun executeMapping(type: List<MainResponseDetailData>): MarketPlaceDetailViewData {
+        type.first().body.let { data ->
             return MarketPlaceDetailViewData(
                 marketPlaceIdentifier = data?.id.orEmpty(),
                 pictures = parsePictureViewData(data?.pictures),

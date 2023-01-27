@@ -17,6 +17,6 @@ class MarketPlaceMapperFacadeImpl @Inject constructor(
     override fun marketPlaceListExecuteMapper(mainResponseListData: MainResponseListData): MarketPlaceListViewData =
         marketPlaceListMapper.executeMapping(mainResponseListData)
 
-    override fun marketPlaceDetailExecuteMapper(mainResponseDetailData: MainResponseDetailData): MarketPlaceDetailViewData =
+    override fun marketPlaceDetailExecuteMapper(mainResponseDetailData: List<MainResponseDetailData>): MarketPlaceDetailViewData =
         marketPlaceDetailMapper.executeMapping(mainResponseDetailData)
 }

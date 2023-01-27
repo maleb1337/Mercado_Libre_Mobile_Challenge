@@ -7,5 +7,5 @@ import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.model.MarketPl
 
 interface MarketPlaceMapperFacade {
     fun marketPlaceListExecuteMapper(mainResponseListData: MainResponseListData): MarketPlaceListViewData
-    fun marketPlaceDetailExecuteMapper(mainResponseDetailData: MainResponseDetailData): MarketPlaceDetailViewData
+    fun marketPlaceDetailExecuteMapper(mainResponseDetailData: List<MainResponseDetailData>): MarketPlaceDetailViewData
 }

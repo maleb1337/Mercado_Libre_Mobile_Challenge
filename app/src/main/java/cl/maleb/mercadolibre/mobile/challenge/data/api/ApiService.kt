@@ -21,5 +21,5 @@ interface ApiService {
     @GET(GET_DETAIL_BY_ID)
     suspend fun getDetailById(
         @Query("ids") identifier: String
-    ): MainResponseDetailData
+    ): List<MainResponseDetailData>
 }

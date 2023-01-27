@@ -11,5 +11,5 @@ interface RemoteDataSource {
         @Query("limit") limit: Int
     ): MainResponseListData
 
-    suspend fun getDetailById(@Query("ids") identifier: String): MainResponseDetailData
+    suspend fun getDetailById(@Query("ids") identifier: String): List<MainResponseDetailData>
 }
