@@ -4,4 +4,5 @@
     <string name="retry">retry</string>
     <string name="format_locale_item_price">$ %,d</string>
     <string name="search_action">Search in Mercado Libre</string>
+    <string name="marketplace_detail_title">Product Detail</string>
 </resources>

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import cl.maleb.mercadolibre.mobile.challenge.repository.marketplace.MarketPlaceRepository
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.events.MarketPlaceListEvent
 import cl.maleb.mercadolibre.mobile.challenge.ui.marketplace.list.model.MarketPlaceListItemViewData
@@ -36,9 +37,10 @@ class MarketPlaceListViewModel @Inject constructor(private val repository: Marke
              *  but it has a weird behaviour with the recycler itself,
              *  that's why is without cache now.
              */
-            repository.getMarketPlaceListWithoutCache(searchQuery).collect {
-                _marketPlaceItemsLiveData.value = it
-            }
+            repository.getMarketPlaceListWithoutCache(searchQuery).cachedIn(viewModelScope)
+                .collect {
+                    _marketPlaceItemsLiveData.value = it
+                }
         }
     }
 

@@ -8,6 +8,7 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import cl.maleb.mercadolibre.mobile.challenge.R
 import cl.maleb.mercadolibre.mobile.challenge.databinding.FragmentMarketplaceListBinding
@@ -89,11 +90,15 @@ class MarketPlaceListFragment : Fragment() {
             viewModel.marketPlaceListEvent.collect { event ->
                 when (event) {
                     is MarketPlaceListEvent.NavigateToDetailScreen -> {
-                        // TODO: redirect to detail
-                        event.marketPlaceIdentifier
+                        val action =
+                            MarketPlaceListFragmentDirections.actionMarketPlaceListFragmentToMarketPlaceDetailFragment(
+                                event.marketPlaceIdentifier
+                            )
+                        findNavController().navigate(action)
                     }
                     is MarketPlaceListEvent.SearchByQuery -> {
                         viewModel.getMarketPlaceList(event.searchQuery)
+                        searchView.clearFocus()
                     }
                 }
             }
